@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-navbar class="g__header_main">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div class="p__row p__row-header">
+      <div>
+        <ion-icon name="home"></ion-icon>
+      </div>
+      <div>
+        ホーム
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="created">
+    <ion-segment [(ngModel)]="segment" color="primary">
+      <ion-segment-button value="before">
+        開催前
+      </ion-segment-button>
+      <ion-segment-button value="after">
+        開催後
+      </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="segment" class="accepts-list">
+      <ion-list *ngSwitchCase="'before'">
+        <ng-container *ngIf="flg">
+          <ng-container *ngIf="before.length == 0">
+            <div class="empty">
+              <div>
+                <ion-icon name="pricetags"></ion-icon>
+              </div>
+              チケットをもっていません。
+            </div>
+          </ng-container>
+          <button ion-item *ngFor="let m of before" (click)="detail(m)">
+            <ion-thumbnail item-start>
+              <img [src]="m.thumb ? m.thumb:'https://tipnem.tk:6745/image-v1/'+m.mid"/>
+            </ion-thumbnail>
+            <h2>{{m.title}}</h2>
+            <p>{{m.dates}}</p>
+            <p>{{m.mid}}</p>
+            <button ion-button clear item-end>詳細</button>
+          </button>
+        </ng-container>
+      </ion-list>
+      <ion-list *ngSwitchCase="'after'">
+        <ng-container *ngIf="flg">
+          <ng-container *ngIf="after.length == 0">
+            <div class="empty">
+              <div>
+                <ion-icon name="pricetags"></ion-icon>
+              </div>
+              チケットをもっていません。
+            </div>
+          </ng-container>
+          <button ion-item *ngFor="let m of after" (click)="detail(m)">
+            <ion-thumbnail item-start>
+              <img [src]="m.thumb ? m.thumb:'https://tipnem.tk:6745/image-v1/'+m.mid"/>
+            </ion-thumbnail>
+            <h2>{{m.title}}</h2>
+            <p>{{m.dates}}</p>
+            <p>{{m.mid}}</p>
+            <button ion-button clear item-end>詳細</button>
+          </button>
+        </ng-container>
+      </ion-list>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!created">
+    <div class="top">
+      <h1 class="title">nempass</h1>
+      <div class="msg">チケット管理をモザイクで。</div>
+      <div class="ver">ver{{version}}</div>
+      <!--
+        <div class="btg">
+        <button ion-button class="p__orange-bt" (click)="goToImportWallet()">NanoWalletからインポート(QR)</button>
+        </div>
+      -->
+      <div class="btg">
+        <button ion-button class="p__blue-bt" (click)="goToDemoAcount(1)">デモアカウント(参加者側)</button>
+      </div>
+      <div class="btg">
+        <button ion-button class="p__orange-bt" (click)="goToDemoAcount(2)">デモアカウント(主催者側)</button>
+      </div>
+    </div>
+  </ng-container>
+</ion-content>

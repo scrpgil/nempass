@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar class="g__header_main">
+    <ion-title>詳細</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="g__bgc_main">
+  <div class="detail">
+    <h1 class="title">{{m.title}}</h1>
+    <div class="qr">
+      <div class="title">受付票</div>
+      <qrcode [qrdata]="myQR" [size]="200" [level]="'M'" *ngIf="show && !enc"></qrcode>
+      <button ion-button (click)="decode()" *ngIf="enc">QRコードを生成する</button>
+      <div class="loading-spinner" *ngIf="!show">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+    </div>
+    <div class="p__row dates"><ion-icon name="time"></ion-icon>{{m.dates}}</div>
+    <div class="p__row location"><ion-icon name="map"></ion-icon>{{m.location}}</div>
+  </div>
+  <div class="google-maps">
+    <iframe [src]='url' width="600" height="500" frameborder="0" style="border:0"></iframe>
+  </div>
+  <div>{{m.mid}} </div>
+</ion-content>

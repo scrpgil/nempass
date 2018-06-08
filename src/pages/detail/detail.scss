@@ -1,0 +1,29 @@
+page-detail {
+    .detail{
+        padding:2px 6px;
+        width:100%;
+        color:#fff;
+        .title{
+
+        }
+        .qr{
+            .title{
+                color:#000;
+                font-size: 24px;
+                margin:10px;
+            }
+            text-align: center;
+            width:100%;
+            padding:10px 40px 40px;
+            background-color: #fff;
+            border-radius:6px;
+            border:solid #999 1px;
+            img{
+                margin:auto;
+            }
+        }
+        .dates, .location{
+            font-size: 19px;
+        }
+    }
+}

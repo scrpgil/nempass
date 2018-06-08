@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar class="g__header_main">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>イベント受付({{m.title}})</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="scan-area">
+    <video #camera autoplay height=200 id="video"></video>
+    <canvas #canvas id="canvas" ></canvas>
+  </div>
+  <div class="p__row">
+    <button ion-button (click)="showCamera()" *ngIf="!showing">受付(カメラ)起動</button>
+    <button ion-button (click)="hideCamera()" *ngIf="showing">受付(カメラ)停止</button>
+    <ion-select interface="popover" [(ngModel)]="device">
+      <ion-option *ngFor="let d of devices" [value]="d">{{d.label}}</ion-option>
+    </ion-select>
+  </div>
+  <ion-segment [(ngModel)]="segment" color="primary">
+    <ion-segment-button value="before">
+      受付済：{{accepts.length}}人
+    </ion-segment-button>
+    <ion-segment-button value="after">
+      参加予定者：{{after.length}}人
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="segment" class="accepts-list">
+    <ion-list *ngSwitchCase="'before'">
+      <ion-item *ngFor="let a of accepts" text-wrap (click)="goToChainPage(a)">
+        <ion-thumbnail item-start>
+          <img *ngIf="!a.assign" src="assets/imgs/chk.png"/>
+          <img *ngIf="a.assign" src="assets/imgs/asign.png"/>
+        </ion-thumbnail>
+        <h3 class="time">{{a.time}}</h3>
+        <h3 class="addr">{{a.addr}}</h3>
+        <button ion-button clear item-end>詳細</button>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'after'">
+      <ion-item *ngFor="let t of after" text-wrap>
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/chk_person.png"/>
+        </ion-thumbnail>
+        <h3 class="time">{{t.transaction.timeStamp | fmtNemDate | date:'dd/MM/yy HH:mm':'+0900'}}</h3>
+        <h3 class="addr">{{t.transaction.signerAddress}}</h3>
+        <p class="addr">TxHash:{{t.meta.hash.data}}</p>
+        <div class="chk" item-end *ngIf="t.chk">済み</div>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar class="g__header_main">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div class="p__row p__row-header">
+      <div>
+        <ion-icon name="create"></ion-icon>
+      </div>
+      <div>
+        イベント作成
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="!ownerMosaic">
+    <div class="empty">
+      <div>
+        <ion-icon name="apps"></ion-icon>
+      </div>
+      モザイクを持っていません
+    </div>
+  </ng-container>
+  <ion-list class="create" *ngIf="ownerMosaic" no-lines>
+    <div class="section-divider">
+      <div class="name">イベントに使用するモザイク</div>
+    </div>
+    <ion-item>
+      <ion-select interface="popover" [(ngModel)]="ev.mid" (ionChange)="change()">
+        <ng-container *ngFor="let om of ownerMosaic">
+          <ng-container *ngFor="let m of om.mosaics">
+            <ion-option [value]="m.mosaic.id.namespaceId + ':' + m.mosaic.id.name">{{m.mosaic.id.namespaceId + ':' + m.mosaic.id.name}}</ion-option>
+          </ng-container>
+        </ng-container>
+      </ion-select>
+    </ion-item>
+    <hr>
+    <ion-item>
+      <div class="title">
+        <div class="name">イベント名</div>
+        <div class="len">残り{{100-ev.name.length}}文字</div>
+      </div>
+      <textarea elastic [(ngModel)]="ev.name" (input)="change()" maxlength="100"></textarea>
+    </ion-item>
+    <hr>
+    <div class="section-divider">
+      <div class="name">イベント日時</div>
+      <div class="section-divider2">
+        <div class="name">開始日時</div>
+      </div>
+      <ion-item>
+        <ion-datetime (ionChange)="change()" displayFormat="YYYY/MM/DD HH:mm" min="2016" max="2032-12-31"  [(ngModel)]="ev.start"></ion-datetime>
+      </ion-item>
+      <div class="section-divider2">
+        <div class="name">終了日時</div>
+      </div>
+      <ion-item>
+        <ion-datetime (ionChange)="change()" displayFormat="YYYY/MM/DD HH:mm" min="2016" max="2032-12-31"  [(ngModel)]="ev.end"></ion-datetime>
+      </ion-item>
+    </div>
+    <hr>
+    <ion-item>
+      <div class="title">
+        <div class="name">開催場所</div>
+        <div class="len">残り{{200-ev.locate.length}}文字</div>
+      </div>
+      <textarea elastic [(ngModel)]="ev.locate" (input)="change()" maxlength="200"></textarea>
+    </ion-item>
+    <button small clear ion-button (click)="showMap()">Googleマップで表示</button>
+    <div class="google-maps" *ngIf="showMapFlg">
+      <iframe [src]='url' width="600" height="400" frameborder="0" style="border:0"></iframe>
+    </div>
+    <div class="confirm">
+      <button ion-button full style="background-color:#E01021" [disabled]="flg" (tap)="next()">イベントを作成する({{sum}}XEM)</button>
+    </div>
+  </ion-list>
+</ion-content>

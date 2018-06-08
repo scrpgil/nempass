@@ -1,0 +1,29 @@
+<div class="scan-content">
+  <div class="scan-header">
+    <div class="p__row">
+      <div class="p__col">
+        <button ion-button icon-only clear (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </div>
+      <div class="p__col p__col-right upload-bt" *ngIf="!isiOS">
+        <label class="label" for="uploadImage">フォルダ</label>
+        <input id="uploadImage" type="file" (change)="handleFileInput($event)"/>
+      </div>
+    </div>
+  </div>
+  <div class="scan-area">
+    <video #camera autoplay id="video" *ngIf="!hide"></video>
+    <canvas #canvas id="canvas" ></canvas>
+  </div>
+  <div class="scan-footer">
+    <div class="description">
+      QRコードを中心に持ってきてください
+    </div>
+    <div class="manual" *ngIf="type==1">
+      <button ion-button clear small (click)="goToPayEditPage()">
+        手動入力
+      </button>
+    </div>
+  </div>
+</div>

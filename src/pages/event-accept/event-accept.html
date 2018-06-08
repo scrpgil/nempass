@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar class="g__header_main">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div class="p__row p__row-header">
+      <div>
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </div>
+      <div>
+        イベント受付
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="mosaics">
+    <div class="m">
+      <ion-list *ngIf="mosaics">
+        <ng-container *ngIf="mosaics.length == 0">
+          <div class="empty">
+            <div>
+              <ion-icon name="pricetags"></ion-icon>
+            </div>
+            イベントを作成していません
+          </div>
+        </ng-container>
+        <button ion-item *ngFor="let m of mosaics" (click)="detail(m)">
+          <ion-thumbnail item-start>
+            <img [src]="m.thumb ? m.thumb:'https://tipnem.tk:6745/image-v1/'+m.mid"/>
+          </ion-thumbnail>
+          <h2>{{m.title}}</h2>
+          <p>{{m.dates}}</p>
+          <p>{{m.mid}}</p>
+          <button ion-button clear item-end>詳細</button>
+        </button>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

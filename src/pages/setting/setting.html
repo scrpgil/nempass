@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar class="g__header_main">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div class="p__row p__row-header">
+      <div>
+        <ion-icon name="settings"></ion-icon>
+      </div>
+      <div>
+        設定
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="account-balance">
+    <div class="title">
+      残高(XEM)
+    </div>
+    <div class="amount">
+      {{amount}}
+    </div>
+  </div>
+  <ion-list class="address">
+    <button ion-item text-wrap (click)="copyAddress()">
+      <h4>アドレス</h4>
+      <h3>{{address}}</h3>
+    </button>
+  </ion-list>
+  <ion-list class="setting">
+    <div class="header">
+      ノード
+    </div>
+    <ion-item>
+      <ion-select [ngModel]="host" (ngModelChange)="chgNode($event)">
+        <ng-container *ngFor="let n of nodelist">
+          <ion-option [value]="n.host">{{n.host}}</ion-option>
+        </ng-container>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list class="setting">
+    <div class="header">
+      その他
+    </div>
+    <button ion-item>バージョン：v{{ver}}</button>
+    <button class="delete-account" ion-item (tap)="deleteAccount()">ログアウト</button>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,6 @@
+<ion-split-pane>
+  <ion-menu [content]="content">
+    <ion-nav [root]="listPage" #sideMenu swipeBackEnabled="false"></ion-nav>
+  </ion-menu>
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false" main></ion-nav>
+</ion-split-pane>

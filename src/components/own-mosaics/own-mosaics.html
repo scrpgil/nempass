@@ -1,0 +1,15 @@
+<div class="mosaics">
+  <div class="m">
+    <ion-list>
+      <button ion-item *ngFor="let m of mosaics" (click)="detail(m)">
+        <ion-thumbnail item-start>
+          <img [src]="m.thumb ? m.thumb:'https://tipnem.tk:6745/image-v1/'+m.mid"/>
+        </ion-thumbnail>
+        <h2>{{m.title}}</h2>
+        <p>{{m.dates}}</p>
+        <p>{{m.mid}}</p>
+        <button ion-button clear item-end>詳細</button>
+      </button>
+    </ion-list>
+  </div>
+</div>

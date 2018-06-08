@@ -1,0 +1,41 @@
+page-chain {
+    .chain{
+        margin:8px;
+        .addr{
+            border-radius:8px;
+            border:2px solid #666;
+            padding:8px;
+        }
+        .own{
+            border:2px solid #FD8B8C;
+        }
+        .arrow{
+            padding:10px;
+            position: relative;
+        }
+        .detail{
+            position: absolute;
+            margin-left:50px;
+        }
+        .arrow-down{
+            position: absolute;
+            display:inline-block;
+            height:50px;
+            width:8px;
+            background-color:#5bc0de;
+            position:relative;
+            left:12px;
+            top:-4px;
+        }
+        .arrow-down:before{
+            position:absolute;
+            content:"";
+            width:0;
+            height:0;
+            border:20px solid transparent;
+            border-top:20px solid #5bc0de;
+            left:-16px;
+            top:38px;
+        }
+    }
+}

@@ -1,0 +1,66 @@
+page-event-create {
+    .create{
+        max-width:600px;
+        margin-top:10px;
+    }
+    ion-select{
+        max-width:none;
+        padding-left:0px;
+        .item-cover {
+            width: 0;
+            height: 0;
+        }
+    }
+    ion-item{
+        .title{
+            display: flex;
+            .name{
+                font-weight: bold;
+                font-size: 15px;
+                padding:2px 0px;
+                width:80%;
+            }
+            .len{
+                text-align: right;
+                margin-right: 17px;
+                width:18%;
+                font-size: 13px;
+            }
+        }
+        textarea{
+            width:100%;
+            display: block;
+            max-width:600px;
+            border:1px solid #666;
+        }
+    }
+    .need{
+        font-size: 14px;
+        background-color: #FD7823;
+        font-weight: bold;
+        color:#fff;
+        padding:2px 12px;
+        margin:2px 5px;
+    }
+    .section-divider{
+        margin-left:16px;
+        font-weight: bold;
+        font-size: 15px;
+        padding:2px 0px;
+    }
+    .section-divider2{
+        margin-left:18px;
+    }
+    .confirm{
+        margin:15px auto;
+        padding:10px;
+        max-width:600px;
+        .fee{
+            text-align: left;
+            .total{
+                font-size: 34px;
+                margin-right:8px;
+            }
+        }
+    }
+}

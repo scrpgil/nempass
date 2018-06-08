@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar class="g__header_main">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{m.title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="event-manage">
+    <div class="p__row">
+      <div class="p__col qr__col">
+        <div>販売用QR</div>
+        <qrcode [qrdata]="myQR" [size]="150" [level]="'M'" *ngIf="show"></qrcode>
+        <div class="xem" *ngIf="qr.data.amount>0">{{qr.data.amount / 1000000}} XEM</div>
+        <button ion-button clear (click)="setAmount()">価格変更</button>
+      </div>
+      <div class="p__col">
+        <div class="title">
+          {{m.title}}
+        </div>
+        <div class="time">
+          {{m.dates}}
+        </div>
+        <div class="locate">
+          {{m.location}}
+        </div>
+      </div>
+    </div>
+    <ion-segment [(ngModel)]="segment" color="primary">
+      <ion-segment-button value="before">
+        発送待ち:{{before.length}}人
+      </ion-segment-button>
+      <ion-segment-button value="after">
+        発送済み:{{after.length}}人
+      </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="segment" class="accepts-list">
+      <ion-list *ngSwitchCase="'before'">
+        <ion-item *ngFor="let t of before" text-wrap>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/no_person.png"/>
+          </ion-thumbnail>
+          <h3 class="time">{{t.transaction.timeStamp | fmtNemDate | date:'dd/MM/yy HH:mm':'+0900'}}</h3>
+          <h3 class="addr">{{t.transaction.signerAddress}}</h3>
+          <p class="addr">{{t.transaction.amount / 1000000}} XEM</p>
+          <button ion-button item-end (click)="goToConfirm(t)">発送する</button>
+        </ion-item>
+      </ion-list>
+      <ion-list *ngSwitchCase="'after'">
+        <ion-item *ngFor="let t of after" text-wrap>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/chk_person.png"/>
+          </ion-thumbnail>
+          <h3 class="time">{{t.transaction.timeStamp | fmtNemDate | date:'dd/MM/yy HH:mm':'+0900'}}</h3>
+          <h3 class="addr">{{t.transaction.signerAddress}}</h3>
+          <p class="addr">TxHash:{{t.meta.hash.data}}</p>
+          <div class="chk" item-end>発送済み</div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

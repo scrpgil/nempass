@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar class="g__header_main">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      入手ルート
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="chain-list">
+    <ng-container *ngFor="let t of chain; let last = last">
+      <div class="chain">
+        <div class="addr">{{t.transaction.signerAddress}}</div>
+        <div class="arrow">
+          <div class="detail">
+            <div class="time">{{t.transaction.timeStamp | fmtNemDate | date:'yyyy/MM/dd HH:mm':'+0900'}}</div>
+            <div class="txid">TxHash:{{t.meta.hash.data}}</div>
+            <div class="amount">{{t.transaction.amount / 1000000}} XEM</div>
+          </div>
+          <div class="arrow-down"></div>
+        </div>
+      </div>
+      <div  class="chain" *ngIf="last">
+        <div class="addr own">{{t.transaction.recipient}}</div>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>
